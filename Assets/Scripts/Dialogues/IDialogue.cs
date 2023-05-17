@@ -4,18 +4,20 @@ using UnityEngine;
 
 namespace Dialogues {
     public interface IDialogue {
-        public GameObject DialogueContainer { get; }
-        public GameObject ChoicesContainer { get; }
-        public GameObject SpeakSeparator { get; }
-        public GameObject ChoicesSeparator { get; }
-        public TextMeshProUGUI SpeakerName { get; }
-        public TextMeshProUGUI SpeakerLine { get; }
+        public GameObject DialogueContainer { set; }
+        public GameObject ChoicesContainer { set; }
+        public GameObject SpeakSeparator { set; }
+        public GameObject ChoicesSeparator { set; }
+        public TextMeshProUGUI SpeakerName { set; }
+        public TextMeshProUGUI SpeakerLine { set; }
 
-        public RuntimeDialogueGraph DialogueLogic { get; }
-        public IChoicesController ChoicesController { get; }
+        public PlayerInput Input { set; }
+        public RuntimeDialogueGraph DialogueLogic { set; }
+        public ChoicesController ChoicesController { set; }
         public bool DialogueActive { get; }
 
         public void StartDialogue();
+
         public void PlayerSelect(int index);
     }
 }

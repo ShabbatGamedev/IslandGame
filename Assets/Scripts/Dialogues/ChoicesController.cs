@@ -1,23 +1,19 @@
 ﻿using System.Collections.Generic;
 using DialogueGraph.Runtime;
-using Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Dialogues {
-    public class ChoicesController : MonoBehaviour, IChoicesController {
-        [SerializeField] DialogueChoice prefab;
-        [SerializeField] HorseFuckDialogue dialogue;
-        
-        public DialogueChoice Prefab => prefab;
-        public IDialogue Dialogue => dialogue;
-        PlayerInput.DialogueSelectionActions _input;
+    public class ChoicesController : MonoBehaviour {
+        public PlayerInput.DialogueSelectionActions Input { get; set; }
+        public DialogueChoice Prefab { get; set; }
+        public IDialogue Dialogue { get; set; }
+
         List<DialogueChoice> _choices;
         int _selectedIndex;
 
-        void Awake() => _input = InputsSingleton.PlayerInput.DialogueSelection;
-        void OnEnable() => _input.Enable();
-        void OnDisable() => _input.Disable();
+        void OnEnable() => Input.Enable();
+        void OnDisable() => Input.Disable();
 
         void ChoiceByNumbers(InputAction.CallbackContext ctx) => SelectLine((int)ctx.ReadValue<float>());
         
@@ -52,12 +48,12 @@ namespace Dialogues {
             _selectedIndex = 0;
             _choices[0].Select(true);
             
-            _input.Enable();
+            Input.Enable();
             
-            _input.ChoiceByNumbers.performed += ChoiceByNumbers;
-            _input.SelectUpper.performed += SelectUpper;
-            _input.SelectBottom.performed += SelectBottom;
-            _input.SubmitSelection.performed += SubmitSelection;
+            Input.ChoiceByNumbers.performed += ChoiceByNumbers;
+            Input.SelectUpper.performed += SelectUpper;
+            Input.SelectBottom.performed += SelectBottom;
+            Input.SubmitSelection.performed += SubmitSelection;
         }
 
         public void SelectLine(int index) {
@@ -67,12 +63,12 @@ namespace Dialogues {
         }
 
         public void Clear() {
-            _input.Disable();
+            Input.Disable();
             
-            _input.ChoiceByNumbers.performed -= ChoiceByNumbers;
-            _input.SelectUpper.performed -= SelectUpper;
-            _input.SelectBottom.performed -= SelectBottom;
-            _input.SubmitSelection.performed -= SubmitSelection;
+            Input.ChoiceByNumbers.performed -= ChoiceByNumbers;
+            Input.SelectUpper.performed -= SelectUpper;
+            Input.SelectBottom.performed -= SelectBottom;
+            Input.SubmitSelection.performed -= SubmitSelection;
 
             _choices.ForEach(choice => Destroy(choice.gameObject));
             _choices.Clear();

@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4937123214357665739
 Transform:
   m_ObjectHideFlags: 0
@@ -77,9 +77,23 @@ MonoBehaviour:
       - aeda9f22-0c02-4582-88b2-18a966d0770e
       m_values: 00000000
     TriggerData:
-    - _target: {fileID: 0}
-      _methodName: 
-      _args: []
+    - _target: {fileID: 1656735709391893893}
+      _methodName: HorseFuck
+      _args:
+      - boolValue: 0
+        intValue: 0
+        floatValue: 0
+        stringValue: 
+        objectValue: {fileID: 0}
+        argType: 4
+        _typeName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+      - boolValue: 0
+        intValue: 0
+        floatValue: 0
+        stringValue: 
+        objectValue: {fileID: 0}
+        argType: 2
+        _typeName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
       _dynamic: 1
       _typeName: DialogueGraph.Runtime.TriggerEvent, DialogueGraph.Runtime, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
@@ -100,6 +114,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27e7b72cde4347aba92e033fa0bd3b5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueLogic: {fileID: -4323885331754411489}
-  dialogueContainer: {fileID: 0}
-  choicesController: {fileID: 0}

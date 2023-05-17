@@ -1,31 +1,15 @@
 ﻿using System.Collections.Generic;
 using DialogueGraph.Runtime;
-using Input;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 namespace Dialogues {
     public class HorseFuckDialogue : MonoBehaviour, IDialogue {
-        [SerializeField] GameObject dialogueContainer;
-        [SerializeField] GameObject choicesContainer;
-        [SerializeField] GameObject speakSeparator;
-        [SerializeField] GameObject choicesSeparator;
-        [SerializeField] TextMeshProUGUI speakerName;
-        [SerializeField] TextMeshProUGUI speakerLine;
-
-        [SerializeField] RuntimeDialogueGraph dialogueLogic;
-        [SerializeField] ChoicesController choicesController;
-
-        PlayerInput _input;
-
         bool _playerChoosing;
         bool _shouldShowText;
         bool _showingText;
         string _textToShow;
-
-        void Awake() => _input = InputsSingleton.PlayerInput;
 
         void Update() {
             if (_shouldShowText) {
@@ -53,7 +37,7 @@ namespace Dialogues {
                 ActorData currentActor = DialogueLogic.GetCurrentActor();
                 _shouldShowText = true;
                 _textToShow = DialogueLogic.ProgressNpc();
-                speakerName.text = currentActor.Name;
+                SpeakerName.text = currentActor.Name;
             } else {
                 _playerChoosing = true;
                 List<ConversationLine> currentLines = DialogueLogic.GetCurrentLines();
@@ -68,37 +52,38 @@ namespace Dialogues {
 
             _showingText = false;
             DialogueContainer.SetActive(false);
-            speakerLine.gameObject.SetActive(false);
+            SpeakerLine.gameObject.SetActive(false);
         }
 
         void OnEnable() {
-            _input.Player.Disable();
-            _input.DialogueReading.Enable();
-            _input.DialogueReading.NextLine.performed += NextLine;
+            Input.Player.Disable();
+            Input.DialogueReading.Enable();
+            Input.DialogueReading.NextLine.performed += NextLine;
         }
 
         void OnDisable() {
-            _input.DialogueReading.NextLine.performed -= NextLine;
-            _input.DialogueReading.Disable();
-            _input.Player.Enable();
+            Input.DialogueReading.NextLine.performed -= NextLine;
+            Input.DialogueReading.Disable();
+            Input.Player.Enable();
         }
 
-        public GameObject DialogueContainer => dialogueContainer;
-        public GameObject ChoicesContainer => choicesContainer;
-        public GameObject SpeakSeparator => speakSeparator;
-        public GameObject ChoicesSeparator => choicesSeparator;
-        public TextMeshProUGUI SpeakerName => speakerName;
-        public TextMeshProUGUI SpeakerLine => speakerLine;
+        public GameObject DialogueContainer { get; set; }
+        public GameObject ChoicesContainer { get; set; }
+        public GameObject SpeakSeparator { get; set; }
+        public GameObject ChoicesSeparator { get; set; }
+        public TextMeshProUGUI SpeakerName { get; set; }
+        public TextMeshProUGUI SpeakerLine { get; set; }
 
-        public RuntimeDialogueGraph DialogueLogic => dialogueLogic;
-        public IChoicesController ChoicesController => choicesController;
+        public PlayerInput Input { get; set; }
+        public RuntimeDialogueGraph DialogueLogic { get; set; }
+        public ChoicesController ChoicesController { get; set; }
         public bool DialogueActive { get; private set; }
 
         public void StartDialogue() {
             if (DialogueActive) return;
 
-            DialogueLogic.ResetConversation();
             gameObject.SetActive(true);
+            DialogueLogic.ResetConversation();
             DialogueActive = true;
         }
 

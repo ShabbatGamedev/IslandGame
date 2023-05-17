@@ -181,6 +181,13 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
+    "net.wraithavengames.unityinterfacesupport": {
+      "version": "https://github.com/TheDudeFromCI/Unity-Interface-Support.git?path=/Packages/net.wraithavengames.unityinterfacesupport",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "c4005ddcefff7ff6e463972d7262918f6b48bcc8"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,

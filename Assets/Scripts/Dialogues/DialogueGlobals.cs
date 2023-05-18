@@ -9,6 +9,7 @@ namespace Dialogues {
     public class DialogueGlobals : MonoBehaviour {
         [SerializeField] public List<GameObject> dialoguePrefabs;
 
+        [SerializeField] GameObject otherUI;
         [SerializeField] GameObject dialogueContainer;
         [SerializeField] GameObject choicesContainer;
         [SerializeField] GameObject speakSeparator;
@@ -19,12 +20,12 @@ namespace Dialogues {
         [SerializeField] DialogueChoice choicePrefab;
         [SerializeField] ChoicesController choicesController;
 
-        public List<IDialogue> Dialogues { get; } = new();
+        public List<Dialogue> Dialogues { get; } = new();
         PlayerInput _input;
 
         static DialogueGlobals Instance { get; set; }
 
-        public static T GetDialogue<T>() where T : class, IDialogue => 
+        public static T GetDialogue<T>() where T : Dialogue => 
             Instance.Dialogues.FirstOrDefault(dialogue => dialogue is T) as T;
 
         void Awake() {
@@ -38,29 +39,30 @@ namespace Dialogues {
             dialoguePrefabs.ForEach(prefab => {
                 GameObject dialogue = Instantiate(prefab, transform);
                 
-                if (!dialogue.TryGetComponent(out IDialogue iDialogue)) {
-                    Debug.Log($"Prefab {prefab} has no {nameof(IDialogue)} component! Please, remove it from {nameof(DialogueGlobals)} GameObject.");
+                if (!dialogue.TryGetComponent(out Dialogue dialogueComponent)) {
+                    Debug.Log($"Prefab {prefab} has no {nameof(Dialogue)} component! Please, remove it from {nameof(DialogueGlobals)} GameObject.");
                     return;
                 }
 
-                if (!dialogue.TryGetComponent(out RuntimeDialogueGraph dialogueLogic)) {
+                if (!dialogueComponent.TryGetComponent(out RuntimeDialogueGraph dialogueLogic)) {
                     Debug.Log($"Prefab {prefab} has no {nameof(RuntimeDialogueGraph)} component! Please, remove it from {nameof(DialogueGlobals)} GameObject.");
                     return;
                 }
 
-                iDialogue.DialogueContainer = dialogueContainer;
-                iDialogue.ChoicesContainer = choicesContainer;
-                iDialogue.SpeakSeparator = speakSeparator;
-                iDialogue.ChoicesSeparator = choicesSeparator;
-                iDialogue.SpeakerName = speakerName;
-                iDialogue.SpeakerLine = speakerLine;
-                iDialogue.Input = _input;
-                iDialogue.DialogueLogic = dialogueLogic;
-                iDialogue.ChoicesController = controller;
+                dialogueComponent.OtherUI = otherUI;
+                dialogueComponent.DialogueContainer = dialogueContainer;
+                dialogueComponent.ChoicesContainer = choicesContainer;
+                dialogueComponent.SpeakSeparator = speakSeparator;
+                dialogueComponent.ChoicesSeparator = choicesSeparator;
+                dialogueComponent.SpeakerName = speakerName;
+                dialogueComponent.SpeakerLine = speakerLine;
+                dialogueComponent.Input = _input;
+                dialogueComponent.DialogueLogic = dialogueLogic;
+                dialogueComponent.ChoicesController = controller;
                 
-                controller.Dialogue = iDialogue;
+                controller.Dialogue = dialogueComponent;
 
-                Dialogues.Add(iDialogue);
+                Dialogues.Add(dialogueComponent);
             });
         }
 

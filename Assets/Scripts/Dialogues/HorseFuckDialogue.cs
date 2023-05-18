@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using DialogueGraph.Runtime;
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Dialogues {
-    public class HorseFuckDialogue : MonoBehaviour, IDialogue {
+    public class HorseFuckDialogue : Dialogue {
         bool _playerChoosing;
         bool _shouldShowText;
         bool _showingText;
@@ -56,39 +55,17 @@ namespace Dialogues {
         }
 
         void OnEnable() {
-            Input.Player.Disable();
-            Input.DialogueReading.Enable();
+            Enabled();
             Input.DialogueReading.NextLine.performed += NextLine;
         }
 
         void OnDisable() {
             Input.DialogueReading.NextLine.performed -= NextLine;
-            Input.DialogueReading.Disable();
-            Input.Player.Enable();
+            Disabled();
         }
 
-        public GameObject DialogueContainer { get; set; }
-        public GameObject ChoicesContainer { get; set; }
-        public GameObject SpeakSeparator { get; set; }
-        public GameObject ChoicesSeparator { get; set; }
-        public TextMeshProUGUI SpeakerName { get; set; }
-        public TextMeshProUGUI SpeakerLine { get; set; }
-
-        public PlayerInput Input { get; set; }
-        public RuntimeDialogueGraph DialogueLogic { get; set; }
-        public ChoicesController ChoicesController { get; set; }
-        public bool DialogueActive { get; private set; }
-
-        public void StartDialogue() {
-            if (DialogueActive) return;
-
-            gameObject.SetActive(true);
-            DialogueLogic.ResetConversation();
-            DialogueActive = true;
-        }
-
-        public void PlayerSelect(int index) {
-            ChoicesController.Deactivate();
+        public override void PlayerSelect(int index) {
+            base.PlayerSelect(index);
             _textToShow = DialogueLogic.ProgressSelf(index);
             _shouldShowText = true;
             _playerChoosing = false;

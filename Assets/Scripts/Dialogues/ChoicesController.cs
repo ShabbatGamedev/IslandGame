@@ -7,7 +7,7 @@ namespace Dialogues {
     public class ChoicesController : MonoBehaviour {
         public PlayerInput.DialogueSelectionActions Input { get; set; }
         public DialogueChoice Prefab { get; set; }
-        public IDialogue Dialogue { get; set; }
+        public Dialogue Dialogue { get; set; }
 
         List<DialogueChoice> _choices;
         int _selectedIndex;

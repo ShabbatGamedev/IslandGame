@@ -1,19 +1,13 @@
 ﻿using Dialogues;
-using Input;
-using UnityEngine;
 
 namespace Interactions.InteractableObjects {
-    public class TestBox : MonoBehaviour, IInteractable {
-        PlayerInput _input;
+    public class TestBox : Interactable {
         HorseFuckDialogue _dialogue;
 
-        string _buttonDisplayName => _input.Player.Interaction.controls[0].name.ToUpper();
-        
-        public string HintText => $"Press {_buttonDisplayName} to interact";
-        
-        public void Interact(IInteractor interactor) => _dialogue.StartDialogue();
+        public override string HintText => $"[{InteractionKey}] Talk";
 
-        void Awake() => _input = InputsSingleton.PlayerInput;
         void Start() => _dialogue = DialogueGlobals.GetDialogue<HorseFuckDialogue>();
+
+        public override void Interact(Interactor interactor) => _dialogue.StartDialogue();
     }
 }

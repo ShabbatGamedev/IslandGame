@@ -26,7 +26,7 @@ namespace Dialogues {
                 _shouldShowText = false;
                 _showingText = false;
                 DialogueActive = false;
-                
+
                 DialogueContainer.SetActive(false);
                 gameObject.SetActive(false);
                 return;
@@ -46,14 +46,6 @@ namespace Dialogues {
             }
         }
 
-        void NextLine(InputAction.CallbackContext ctx) {
-            if (!_showingText) return;
-
-            _showingText = false;
-            DialogueContainer.SetActive(false);
-            SpeakerLine.gameObject.SetActive(false);
-        }
-
         void OnEnable() {
             Enabled();
             Input.DialogueReading.NextLine.performed += NextLine;
@@ -62,6 +54,14 @@ namespace Dialogues {
         void OnDisable() {
             Input.DialogueReading.NextLine.performed -= NextLine;
             Disabled();
+        }
+
+        void NextLine(InputAction.CallbackContext ctx) {
+            if (!_showingText) return;
+
+            _showingText = false;
+            DialogueContainer.SetActive(false);
+            SpeakerLine.gameObject.SetActive(false);
         }
 
         public override void PlayerSelect(int index) {

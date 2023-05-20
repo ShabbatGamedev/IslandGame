@@ -17,7 +17,7 @@ namespace Dialogues {
         public ChoicesController ChoicesController { get; set; }
         public bool DialogueActive { get; set; }
 
-        public void Enabled() { 
+        public void Enabled() {
             OtherUI.SetActive(false);
             Input.Player.Disable();
             Input.DialogueReading.Enable();
@@ -31,7 +31,7 @@ namespace Dialogues {
 
         public virtual void StartDialogue() {
             if (DialogueActive) return;
-            
+
             gameObject.SetActive(true);
             DialogueLogic.ResetConversation();
             DialogueActive = true;

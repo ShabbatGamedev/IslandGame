@@ -14,6 +14,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
+using Object = UnityEngine.Object;
 
 public partial class @PlayerInput: IInputActionCollection2, IDisposable
 {
@@ -629,6 +630,164 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""InventorySelect"",
+            ""id"": ""13f12adc-51eb-470f-bb77-14d1c70503ad"",
+            ""actions"": [
+                {
+                    ""name"": ""SelectByNumbers"",
+                    ""type"": ""Button"",
+                    ""id"": ""33179487-0664-4d52-b74e-11b86db0257d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseWheel"",
+                    ""type"": ""Value"",
+                    ""id"": ""de396dcd-e014-42ec-b236-5798a185504c"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""0a899ee9-ad1d-49a4-9727-fe7d5bc5c527"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=0)"",
+                    ""groups"": """",
+                    ""action"": ""SelectByNumbers"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c1fe37ad-6011-4083-a245-79875826fb17"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale"",
+                    ""groups"": """",
+                    ""action"": ""SelectByNumbers"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3350e9c9-8574-42b6-881f-5f3a38338f22"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=2)"",
+                    ""groups"": """",
+                    ""action"": ""SelectByNumbers"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""011e7d47-4c90-4b6b-9627-5933f20274d4"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=3)"",
+                    ""groups"": """",
+                    ""action"": ""SelectByNumbers"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c7f6c4aa-aa64-4875-8b80-8aa605ad7ce4"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=4)"",
+                    ""groups"": """",
+                    ""action"": ""SelectByNumbers"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d3ca7292-7e47-441c-8e23-32f5f99c7da2"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=5)"",
+                    ""groups"": """",
+                    ""action"": ""SelectByNumbers"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92b774ba-3f33-475d-a266-a63866291cce"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=6)"",
+                    ""groups"": """",
+                    ""action"": ""SelectByNumbers"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""66b170dd-a649-44a9-b4d2-4d343d1bec23"",
+                    ""path"": ""<Keyboard>/8"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=7)"",
+                    ""groups"": """",
+                    ""action"": ""SelectByNumbers"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4914750b-d13b-4bb1-8ca3-766ca5547f9e"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=8)"",
+                    ""groups"": """",
+                    ""action"": ""SelectByNumbers"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Scroll"",
+                    ""id"": ""2cef7ee6-2ca7-45fb-905e-fc21bb73c402"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseWheel"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""9134213c-85e5-4fba-82ed-e4368d9c8ec7"",
+                    ""path"": ""<Mouse>/scroll/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseWheel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""a03c5003-dc66-449e-b63e-793fbf86ba91"",
+                    ""path"": ""<Mouse>/scroll/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseWheel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -650,11 +809,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         // DialogueReading
         m_DialogueReading = asset.FindActionMap("DialogueReading", throwIfNotFound: true);
         m_DialogueReading_NextLine = m_DialogueReading.FindAction("NextLine", throwIfNotFound: true);
+        // InventorySelect
+        m_InventorySelect = asset.FindActionMap("InventorySelect", throwIfNotFound: true);
+        m_InventorySelect_SelectByNumbers = m_InventorySelect.FindAction("SelectByNumbers", throwIfNotFound: true);
+        m_InventorySelect_MouseWheel = m_InventorySelect.FindAction("MouseWheel", throwIfNotFound: true);
     }
 
     public void Dispose()
     {
-        UnityEngine.Object.Destroy(asset);
+        Object.Destroy(asset);
     }
 
     public InputBinding? bindingMask
@@ -909,6 +1072,60 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         }
     }
     public DialogueReadingActions @DialogueReading => new DialogueReadingActions(this);
+
+    // InventorySelect
+    private readonly InputActionMap m_InventorySelect;
+    private List<IInventorySelectActions> m_InventorySelectActionsCallbackInterfaces = new List<IInventorySelectActions>();
+    private readonly InputAction m_InventorySelect_SelectByNumbers;
+    private readonly InputAction m_InventorySelect_MouseWheel;
+    public struct InventorySelectActions
+    {
+        private @PlayerInput m_Wrapper;
+        public InventorySelectActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SelectByNumbers => m_Wrapper.m_InventorySelect_SelectByNumbers;
+        public InputAction @MouseWheel => m_Wrapper.m_InventorySelect_MouseWheel;
+        public InputActionMap Get() { return m_Wrapper.m_InventorySelect; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InventorySelectActions set) { return set.Get(); }
+        public void AddCallbacks(IInventorySelectActions instance)
+        {
+            if (instance == null || m_Wrapper.m_InventorySelectActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_InventorySelectActionsCallbackInterfaces.Add(instance);
+            @SelectByNumbers.started += instance.OnSelectByNumbers;
+            @SelectByNumbers.performed += instance.OnSelectByNumbers;
+            @SelectByNumbers.canceled += instance.OnSelectByNumbers;
+            @MouseWheel.started += instance.OnMouseWheel;
+            @MouseWheel.performed += instance.OnMouseWheel;
+            @MouseWheel.canceled += instance.OnMouseWheel;
+        }
+
+        private void UnregisterCallbacks(IInventorySelectActions instance)
+        {
+            @SelectByNumbers.started -= instance.OnSelectByNumbers;
+            @SelectByNumbers.performed -= instance.OnSelectByNumbers;
+            @SelectByNumbers.canceled -= instance.OnSelectByNumbers;
+            @MouseWheel.started -= instance.OnMouseWheel;
+            @MouseWheel.performed -= instance.OnMouseWheel;
+            @MouseWheel.canceled -= instance.OnMouseWheel;
+        }
+
+        public void RemoveCallbacks(IInventorySelectActions instance)
+        {
+            if (m_Wrapper.m_InventorySelectActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IInventorySelectActions instance)
+        {
+            foreach (var item in m_Wrapper.m_InventorySelectActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_InventorySelectActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public InventorySelectActions @InventorySelect => new InventorySelectActions(this);
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -928,5 +1145,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     public interface IDialogueReadingActions
     {
         void OnNextLine(InputAction.CallbackContext context);
+    }
+    public interface IInventorySelectActions
+    {
+        void OnSelectByNumbers(InputAction.CallbackContext context);
+        void OnMouseWheel(InputAction.CallbackContext context);
     }
 }

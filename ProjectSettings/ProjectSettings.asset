@@ -42,10 +42,6 @@ PlayerSettings:
   m_SplashScreenLogos:
   - logo: {fileID: 21300000, guid: 9a6d8d0e104096b4b9dfeeb3c52d9832, type: 3}
     duration: 2
-  - logo: {fileID: 21300000, guid: 51367f87f99500f45926e2e0406917b9, type: 3}
-    duration: 2
-  - logo: {fileID: 21300000, guid: 93177eb1c87fbcd4f8514cb7100235f2, type: 3}
-    duration: 2
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1920
@@ -744,7 +740,7 @@ PlayerSettings:
   luminVersion:
     m_VersionCode: 1
     m_VersionName: 
-  apiCompatibilityLevel: 6
+  apiCompatibilityLevel: 3
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
   cloudProjectId: 

@@ -7,19 +7,19 @@ namespace Dialogues {
         [SerializeField] TextMeshProUGUI choiceText;
         [SerializeField] TextMeshProUGUI indexText;
         [SerializeField] Image choiceFrame;
+        bool _initialized;
 
         public int Index { get; private set; }
-        bool _initialized;
 
         void Awake() {
             if (_initialized) return;
-            
+
             Initialize("Not initialized", 1);
         }
 
         public void Initialize(string text, int index) {
             Index = index;
-            
+
             choiceText.text = text;
             indexText.text = $"{index + 1}.";
 

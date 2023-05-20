@@ -5,8 +5,9 @@
 
         public static PlayerInput PlayerInput {
             get {
-                lock (Lock) 
+                lock (Lock) {
                     return _playerInput ??= new PlayerInput();
+                }
             }
         }
     }

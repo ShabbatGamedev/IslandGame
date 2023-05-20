@@ -19,26 +19,25 @@ namespace Dialogues {
 
         [SerializeField] DialogueChoice choicePrefab;
         [SerializeField] ChoicesController choicesController;
-
-        public List<Dialogue> Dialogues { get; } = new();
         PlayerInput _input;
 
-        static DialogueGlobals Instance { get; set; }
+        DialogueGlobals() => Instance = this;
 
-        public static T GetDialogue<T>() where T : Dialogue => 
-            Instance.Dialogues.FirstOrDefault(dialogue => dialogue is T) as T;
+        public List<Dialogue> Dialogues { get; } = new();
+
+        static DialogueGlobals Instance { get; set; }
 
         void Awake() {
             _input = InputsSingleton.PlayerInput;
 
             ChoicesController controller = choicesController;
-            
+
             controller.Prefab = choicePrefab;
             controller.Input = _input.DialogueSelection;
 
             dialoguePrefabs.ForEach(prefab => {
                 GameObject dialogue = Instantiate(prefab, transform);
-                
+
                 if (!dialogue.TryGetComponent(out Dialogue dialogueComponent)) {
                     Debug.Log($"Prefab {prefab} has no {nameof(Dialogue)} component! Please, remove it from {nameof(DialogueGlobals)} GameObject.");
                     return;
@@ -59,13 +58,14 @@ namespace Dialogues {
                 dialogueComponent.Input = _input;
                 dialogueComponent.DialogueLogic = dialogueLogic;
                 dialogueComponent.ChoicesController = controller;
-                
+
                 controller.Dialogue = dialogueComponent;
 
                 Dialogues.Add(dialogueComponent);
             });
         }
 
-        DialogueGlobals() => Instance = this;
+        public static T GetDialogue<T>() where T : Dialogue =>
+            Instance.Dialogues.FirstOrDefault(dialogue => dialogue is T) as T;
     }
 }

@@ -18,7 +18,7 @@ namespace Player.Inventory {
             _slots = GetComponentsInChildren<InventorySlot>().ToList();
             _input = InputsSingleton.PlayerInput.InventorySelect;
 
-            _slots.First().Select();
+            _slots.First().SetSelection(true);
         }
 
         void OnEnable() {
@@ -81,8 +81,8 @@ namespace Player.Inventory {
             if (slotIndex > slotsCount) slotIndex = 0;
             else if (slotIndex < 0) slotIndex = slotsCount;
 
-            SelectedSlot.Deselect();
-            _slots[slotIndex].Select();
+            SelectedSlot.SetSelection(false);
+            _slots[slotIndex].SetSelection(true);
         }
     }
 }

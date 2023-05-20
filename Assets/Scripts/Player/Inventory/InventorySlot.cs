@@ -14,6 +14,7 @@ namespace Player.Inventory {
         [SerializeField] Image background;
         [SerializeField] TextMeshProUGUI itemsCount;
         ItemStack _stack;
+        
         public bool HasStack => _stack != null;
 
         public void SetStack(ItemStack stack) {
@@ -32,14 +33,10 @@ namespace Player.Inventory {
 
         public ItemStack GetStack() => _stack;
 
-        public void Select() {
-            selected = true;
-            background.color = SetAlpha(background.color, SelectedAlpha);
-        }
+        public void SetSelection(bool value) {
+            selected = value;
 
-        public void Deselect() {
-            background.color = SetAlpha(background.color, NonSelectedAlpha);
-            selected = false;
+            background.color = SetAlpha(background.color, selected ? SelectedAlpha : NonSelectedAlpha);
         }
 
         static Color SetAlpha(Color color, float a) {

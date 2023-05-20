@@ -3,6 +3,9 @@ using TMPro;
 using UnityEngine;
 
 namespace Dialogues {
+    /// <summary>
+    /// Base class for all dialogues.
+    /// </summary>
     public abstract class Dialogue : MonoBehaviour {
         public GameObject OtherUI { get; set; }
         public GameObject DialogueContainer { get; set; }
@@ -17,12 +20,18 @@ namespace Dialogues {
         public ChoicesController ChoicesController { get; set; }
         public bool DialogueActive { get; set; }
 
+        /// <summary>
+        /// Use it in the OnEnable unity method
+        /// </summary>
         public void Enabled() {
             OtherUI.SetActive(false);
             Input.Player.Disable();
             Input.DialogueReading.Enable();
         }
 
+        /// <summary>
+        /// Use it in the OnDisable unity method
+        /// </summary>
         public void Disabled() {
             Input.DialogueReading.Disable();
             Input.Player.Enable();

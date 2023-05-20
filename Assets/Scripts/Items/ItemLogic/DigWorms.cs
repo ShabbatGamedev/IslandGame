@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace Items.ItemLogic {
-    public class DigWorms : BaseItem {
+    public class DigWorms : BaseItemLogic {
         [SerializeField] ItemObject item;
         [SerializeField] int minimumWorms = 1;
         [SerializeField] int maximumWorms = 3;
@@ -13,9 +13,9 @@ namespace Items.ItemLogic {
             int dugWorms = Random.Range(minimumWorms, maximumWorms + 1);
 
             for (int i = 0; i < dugWorms; i++) {
-                if (interactor.inventory.AddItem(item)) continue;
+                if (PickupItem(interactor)) continue;
 
-                Instantiate(item.prefab, RandomSpawnpoint(transform), Quaternion.identity);
+                Instantiate(Item.prefab, RandomSpawnpoint(transform), Quaternion.identity);
             }
 
             Destroy(gameObject);

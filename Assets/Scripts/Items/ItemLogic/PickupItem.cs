@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace Items.ItemLogic {
-    public class ItemPickering : BaseItem {
+    public class PickupItem : BaseItemLogic {
         [SerializeField] ItemObject item;
 
         public override ItemObject Item => item;
@@ -10,9 +10,9 @@ namespace Items.ItemLogic {
         public override void Interact(Interactor interactor) => Pickup(interactor);
 
         void Pickup(Interactor interactor) {
-            Debug.Log($"Picking up {item.itemName}");
+            Debug.Log($"Picking up {Item.itemName}");
 
-            if (interactor.inventory.AddItem(item)) Destroy(gameObject);
+            if (PickupItem(interactor)) Destroy(gameObject);
             else Debug.LogWarning("Not enough space");
         }
     }

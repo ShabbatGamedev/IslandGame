@@ -4,10 +4,12 @@ using UnityEngine;
 
 namespace Items {
     public class ItemStack {
+        /// <summary>
+        /// Initialize the stack with the item.
+        /// </summary>
+        /// <param name="item">Item in the stack.</param>
         public ItemStack(ItemObject item) {
-            Icon = item.icon;
-            ItemName = item.itemName;
-            StackSize = item.stackSize;
+            StackItem = item;
 
             Items.Add(item);
         }
@@ -16,15 +18,17 @@ namespace Items {
         public bool HasSpace => ItemsCount < StackSize;
         public int ItemsCount => Items.Count;
 
-        public Sprite Icon { get; }
-        public string ItemName { get; }
-        public int StackSize { get; }
+        public Sprite Icon => StackItem.icon;
+        public string ItemName => StackItem.itemName;
+        public int StackSize => StackItem.stackSize;
+        
+        ItemObject StackItem { get; } 
         List<ItemObject> Items { get; } = new();
 
         public event Action StackUpdated;
 
         public bool AddItem(ItemObject item) {
-            if (!HasSpace) return false;
+            if (!HasSpace || StackItem != item) return false;
 
             Items.Add(item);
             StackUpdated?.Invoke();
@@ -32,8 +36,10 @@ namespace Items {
         }
 
         public void RemoveItem(ItemObject item) {
-            Items.Remove(item);
-            StackUpdated?.Invoke();
+            if (StackItem != item) return;
+            
+            if (Items.Remove(item)) 
+                StackUpdated?.Invoke();
         }
     }
 }

@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da8d0dcb6dd4bd1a60cf419862c7255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heart: {fileID: 21300000, guid: e902768be606e9647b8687af8922ff36, type: 3}
-  deadHeart: {fileID: 21300000, guid: 7bb6a6230fd0d1445be6f7879d6cf678, type: 3}
+  heart: {fileID: 21300000, guid: f4b6691c88cecc743b83d20d09a7d8d2, type: 3}
+  deadHeart: {fileID: 21300000, guid: 8e25a86c4faa7fb4b83e135b56c0d0b3, type: 3}
   icon: {fileID: 6623835015091257745}
   isAlive: 1

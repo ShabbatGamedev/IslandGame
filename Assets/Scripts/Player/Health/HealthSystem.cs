@@ -25,7 +25,7 @@ namespace Player.Health {
             CurrentHP = maxHP;
             _hearts = new List<Heart>(maxHP);
 
-            for (int i = 0; i < maxHP; i++) { 
+            for (int i = 0; i < maxHP; i++) {
                 GameObject heart = Instantiate(prefab, transform); // Create a heart on screen
                 Heart heartComponent = heart.GetComponent<Heart>(); // Getting heart component from created heart
                 

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5170146387600243577}
   - component: {fileID: 985564780}
   - component: {fileID: 985564776}
-  - component: {fileID: 7210350565384757767}
   m_Layer: 0
   m_Name: truba
   m_TagString: Untagged
@@ -103,20 +102,6 @@ Rigidbody:
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!64 &985564776
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6683606618917165740}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2534964839176971238, guid: 6aa7e94b12e079a49af01ce6580f7c21, type: 3}
---- !u!64 &7210350565384757767
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

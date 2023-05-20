@@ -7,16 +7,34 @@ using UnityEngine.InputSystem;
 
 namespace Player.Inventory {
     public class InventorySystem : MonoBehaviour {
-        PlayerInput.InventorySelectActions _input;
-        List<InventorySlot> _slots;
+        /// <summary>
+        /// Prefab with <see cref="InventorySlot"/> component.
+        /// </summary>
+        [SerializeField] GameObject prefab;
+        [SerializeField] int maxSlots = 4;
+        
         public bool HaveSpace => _stacks.Count < _slots.Count;
         public InventorySlot SelectedSlot => _slots.SingleOrDefault(slot => slot.selected);
 
+        /// <summary>
+        /// List with <see cref="InventorySlot"/> components>
+        /// </summary>
+        List<InventorySlot> _slots;
+        PlayerInput.InventorySelectActions _input;
         List<ItemStack> _stacks => _slots.Where(slot => slot.HasStack).Select(slot => slot.GetStack()).ToList();
 
         void Awake() {
-            _slots = GetComponentsInChildren<InventorySlot>().ToList();
+            _slots = new List<InventorySlot>(maxSlots);
             _input = InputsSingleton.PlayerInput.InventorySelect;
+
+            for (int i = 0; i < maxSlots; i++) {
+                GameObject slot = Instantiate(prefab, transform); // Create a slot on screen
+                InventorySlot slotComponent = slot.GetComponent<InventorySlot>(); // Getting inventory slot component from created slot
+
+                if (i == 0) slotComponent.SetSelection(true); // Select the first slot
+                
+                _slots.Add(slotComponent); // Adding the inventory slot component to the list
+            }
 
             _slots.First().SetSelection(true);
         }
@@ -36,7 +54,7 @@ namespace Player.Inventory {
         }
 
         public bool AddItem(ItemObject item) {
-            ItemStack stack = _stacks.FirstOrDefault(s => s.ItemName == item.itemName && s.HasSpace);
+            ItemStack stack = _stacks.FirstOrDefault(stack => stack.ItemName == item.itemName && stack.HasSpace);
 
             if (stack != null) {
                 stack.AddItem(item);

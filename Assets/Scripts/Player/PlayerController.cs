@@ -1,46 +1,33 @@
 using Input;
 using Interactions;
+using Items;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Player {
     public class PlayerController : Interactor {
-        public TextMeshProUGUI speedInfo;
-        public TextMeshProUGUI hintText;
+        [SerializeField] TextMeshProUGUI hintTextBlock;
+        [SerializeField] CharacterController controller;
 
-        public CharacterController controller;
-        public UnityEngine.Camera playerCamera;
+        [SerializeField] float jumpHeight = 3;
+        [SerializeField] float gravity = 9.81f;
 
-        public float jumpHeight = 3;
-        public float sneakHeight = 0.25f;
+        [SerializeField] float movementSpeed = 5;
+        [SerializeField] float runningSpeed = 7;
 
-        public float gravity = 9.81f;
-
-        public float movementSpeed = 5;
-        public float runningSpeed = 7;
-        public float sneakSpeed = 3;
-
-        public float maxInteractionDistance = 5;
         Interactable _currentInteractable;
         PlayerInput _input;
-        bool _isSneaking;
         Vector2 _movement;
-        Vector3 _normalScale;
-        Vector3 _position;
         Vector3 _velocity;
-
-        static float _deltaTime => Time.deltaTime;
-        float _speed => (_isSneaking ? sneakSpeed : _isRunning ? runningSpeed : movementSpeed) * _deltaTime;
-
-        static Vector2 _screenCenter => new Vector2(Screen.width, Screen.height) / 2;
-        bool _isRunning => _input.Player.Run.IsPressed();
+        
+        float _speed => (_input.Player.Run.IsPressed() ? runningSpeed : movementSpeed) * Time.deltaTime;
 
         void Awake() {
-            _normalScale = transform.localScale;
-
             _input = InputsSingleton.PlayerInput;
+            
             _input.Player.Interaction.performed += InteractionPerformed;
+            _input.Player.UseItem.performed += UseItemPerformed;
         }
 
         void Update() {
@@ -62,45 +49,33 @@ namespace Player {
 
             if (canJump) _velocity.y = Mathf.Sqrt(jumpHeight * -2 * -gravity);
             else if (controller.isGrounded) _velocity.y = -2;
-            else _velocity.y -= gravity * _deltaTime;
+            else _velocity.y -= gravity * Time.deltaTime;
 
             controller.Move(movement);
-            speedInfo.SetText($"Speed: {controller.velocity.magnitude:0.#}");
-
-            controller.Move(_velocity * _deltaTime);
+            controller.Move(_velocity * Time.deltaTime);
         }
-
-        //todo: fix this shit
-        /*void Sneak() {
-            bool canSneak = _input.Player.Sneak.IsPressed() && controller.isGrounded;
-
-            switch (canSneak) {
-                case true when !_isSneaking:
-                    _isSneaking = true;
-                    playerTransform.localScale = new Vector3(_normalScale.x, _normalScale.y - sneakHeight, _normalScale.z);
-                    break;
-
-                case false when _isSneaking:
-                    _isSneaking = false;
-                    playerTransform.localScale = _normalScale;
-                    break;
-            }
-        }*/
 
         void RaycastInteractions() {
             Ray ray = playerCamera.ScreenPointToRay(_screenCenter);
 
             if (!Physics.Raycast(ray, out RaycastHit hit, maxInteractionDistance) ||
                 !hit.transform.TryGetComponent(out _currentInteractable)) {
-                hintText.SetText("");
+                if (hintTextBlock.text != "") 
+                    hintTextBlock.SetText("");
+                
                 return;
             }
 
-            hintText.SetText(_currentInteractable.HintText);
+            hintTextBlock.SetText(_currentInteractable.HintText);
         }
 
         void InteractionPerformed(InputAction.CallbackContext ctx) {
             if (_currentInteractable != null) _currentInteractable.Interact(this);
+        }
+
+        void UseItemPerformed(InputAction.CallbackContext ctx) {
+            ItemObject item = inventory.SelectedSlot.GetItem();
+            if (item != null) item.Use(this);
         }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using Interactions;
+using Items.UserItems;
 using UnityEngine;
 
 namespace Items.ItemLogic {
     public class DigWorms : BaseItemLogic {
-        [SerializeField] ItemObject item;
+        [SerializeField] Worm item;
         [SerializeField] int minimumWorms = 1;
         [SerializeField] int maximumWorms = 3;
 

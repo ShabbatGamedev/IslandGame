@@ -1,10 +1,11 @@
 ﻿using System;
+using Interactions;
 using JetBrains.Annotations;
+using Player.Inventory;
 using UnityEngine;
 
 namespace Items {
-    [CreateAssetMenu(fileName = "Item", menuName = "Inventory/Item", order = 0)]
-    public class ItemObject : ScriptableObject {
+    public abstract class ItemObject : ScriptableObject {
         public readonly Guid _guid = Guid.NewGuid();
         
         public string itemName = "New item";
@@ -12,6 +13,14 @@ namespace Items {
         public Sprite icon;
         public GameObject prefab; // Model of the item
         [Range(1, 64)] public int stackSize = 16; // Maximum amount of item in one inventory slot
+
+        public abstract void Use(Interactor interactor);
+
+        public void RemoveFromInventory(Interactor interactor) {
+            InventorySystem inventory = interactor.inventory;
+            
+            inventory.RemoveItem(inventory.SelectedSlot.GetStack(), this);
+        } 
 
         public override int GetHashCode() => _guid.GetHashCode();
 

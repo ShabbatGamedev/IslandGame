@@ -6,7 +6,7 @@ namespace Items.ItemLogic {
     /// </summary>
     public abstract class BaseItemLogic : Interactable {
         public abstract ItemObject Item { get; }
-        public override string HintText => $"[{InteractionKey}] {Item.hintText}";
+        public override string HintText => $"[{InteractionKey}] {Item.hintText}".Trim();
 
         public virtual bool PickupItem(Interactor interactor) => interactor.inventory.AddItem(Item);
     }

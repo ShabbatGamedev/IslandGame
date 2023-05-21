@@ -19,19 +19,21 @@ namespace Player.Inventory {
 
         public void SetStack(ItemStack stack) {
             _stack = stack;
-            _stack.StackUpdated += UpdateUI;
+            _stack.StackUpdated += StackUpdated;
 
             UpdateUI();
         }
 
         public void ClearStack() {
-            _stack.StackUpdated -= UpdateUI;
+            _stack.StackUpdated -= StackUpdated;
             _stack = null;
 
             UpdateUI();
         }
 
         public ItemStack GetStack() => _stack;
+
+        public ItemObject GetItem() => HasStack ? _stack.LastItem() : null;
 
         public void SetSelection(bool value) {
             selected = value;
@@ -44,6 +46,12 @@ namespace Player.Inventory {
             return color;
         }
 
+        void StackUpdated() {
+            if (!_stack.HasItems) _stack = null;
+            
+            UpdateUI();
+        }
+        
         void UpdateUI() {
             if (_stack == null) {
                 itemsCount.text = "";

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Items {
@@ -14,7 +15,7 @@ namespace Items {
             Items.Add(item);
         }
 
-        public bool HasItems => ItemsCount > 0;
+        public bool HasItems => Items.Any();
         public bool HasSpace => ItemsCount < StackSize;
         public int ItemsCount => Items.Count;
 
@@ -41,5 +42,7 @@ namespace Items {
             if (Items.Remove(item)) 
                 StackUpdated?.Invoke();
         }
+
+        public ItemObject LastItem() => Items.LastOrDefault();
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 6474941562984369652}
   - component: {fileID: 5314102107309688103}
   - component: {fileID: 6976994877734935020}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Right leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 4707822610438175764}
   - component: {fileID: 2347532049959534642}
   - component: {fileID: 7038393462601157832}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Amogus
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -230,8 +230,8 @@ CharacterController:
   serializedVersion: 2
   m_Height: 1.65
   m_Radius: 0.51
-  m_SlopeLimit: 75
-  m_StepOffset: 0.3
+  m_SlopeLimit: 50
+  m_StepOffset: 0.5
   m_SkinWidth: 0.07
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: -0.1, z: 0}
@@ -248,6 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 0}
+  health: {fileID: 0}
   speedInfo: {fileID: 0}
   hintText: {fileID: 0}
   controller: {fileID: 2347532049959534642}
@@ -270,7 +271,7 @@ GameObject:
   - component: {fileID: 4550566307589604090}
   - component: {fileID: 3472384085437016462}
   - component: {fileID: 6556464750335115787}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Backpack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -353,7 +354,7 @@ GameObject:
   - component: {fileID: 7563034063976103286}
   - component: {fileID: 8351686274829771954}
   - component: {fileID: 5182418096700436036}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Left leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -434,7 +435,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 360979359296128663}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Legs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -469,7 +470,7 @@ GameObject:
   - component: {fileID: 5403318504228308573}
   - component: {fileID: 1853287969420494624}
   - component: {fileID: 1240113927936824726}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -555,7 +556,7 @@ GameObject:
   - component: {fileID: 717223776303504513}
   - component: {fileID: 365868370463929222}
   - component: {fileID: 7662265241111346291}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}

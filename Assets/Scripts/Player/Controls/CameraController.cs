@@ -7,7 +7,7 @@ namespace Player.Controls {
         const int MaxObstructions = 32;
 
         [Header("Framing")]
-        public UnityEngine.Camera characterCamera;
+        public Camera mainCamera;
         public Vector2 followPointFraming = new(0, 0);
         public float followingSharpness = 10000;
 

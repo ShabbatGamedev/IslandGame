@@ -8,9 +8,10 @@ namespace Interactions {
         
         public InventorySystem inventory;
         public HealthSystem health;
-        public UnityEngine.Camera playerCamera;
 
         public float maxInteractionDistance = 5;
         public float maxAttackDistance = 5;
+        
+        public Camera Camera { get; set; }
     }
 }

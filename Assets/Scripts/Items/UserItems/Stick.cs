@@ -8,7 +8,7 @@ namespace Items.UserItems {
         [SerializeField] int damage = 1;
         
         public override void Use(Interactor interactor) {
-            Ray ray = interactor.playerCamera.ScreenPointToRay(Interactor._screenCenter);
+            Ray ray = interactor.Camera.ScreenPointToRay(Interactor._screenCenter);
             
             if (!Physics.Raycast(ray, out RaycastHit hit, interactor.maxAttackDistance) ||
                 !hit.transform.TryGetComponent(out Enemy enemy)) return;

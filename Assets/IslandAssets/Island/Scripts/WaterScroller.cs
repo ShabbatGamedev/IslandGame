@@ -7,7 +7,7 @@ namespace IslandAssets.Island.Scripts {
 		// Update is called once per frame
 		void Update () {
 			if(GetComponent<Renderer>().material.shader.isSupported)
-				UnityEngine.Camera.main.depthTextureMode |= DepthTextureMode.Depth;
+				Camera.main.depthTextureMode |= DepthTextureMode.Depth;
 
 			float offset = Time.time * scrollSpeed;
 			//Texture scrolling is instanced separately | Best if your scene contains multiple water planes of different speeds

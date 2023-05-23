@@ -1,30 +1,43 @@
-﻿using System;
-using Input;
+﻿using Input;
+using Interactions;
+using Items;
 using KinematicCharacterController.Core;
+using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player.Controls {
-    public class Player : MonoBehaviour {
+    public class Player : Interactor {
+        [Header("Controllers")]
         [SerializeField] CharacterController character;
         [SerializeField] CameraController characterCamera;
 
+        [Header("HUD")]
+        [SerializeField] TextMeshProUGUI hintTextBlock;
+        
+        Interactable _currentInteractable;
         PlayerInput _input;
 
-        void Awake() => _input = InputsSingleton.PlayerInput;
+        void Awake() {
+            Camera = characterCamera.mainCamera;
+            _input = InputsSingleton.PlayerInput;
+
+            _input.Player.Interaction.performed += InteractionPerformed;
+            _input.Player.UseItem.performed += UseItemPerformed;
+        }
 
         void Start() {
             Cursor.lockState = CursorLockMode.Locked;
-                
-            // Tell camera to follow transform
+
             characterCamera.SetFollowTransform(character.cameraFollowPoint);
 
-            // Ignore the character's collider(s) for camera obstruction checks
             characterCamera.ignoredColliders.Clear();
             characterCamera.ignoredColliders.AddRange(character.GetComponentsInChildren<Collider>());
         }
         
         void Update() {
             HandleCharacterInput();
+            RaycastInteractions();
         }
 
         void LateUpdate() {
@@ -52,17 +65,39 @@ namespace Player.Controls {
         void HandleCharacterInput() {
             PlayerCharacterInputs characterInputs = new() {
                 // Build the CharacterInputs struct
-                _moveAxes = _input.Player.Movement.ReadValue<Vector2>(),
                 _cameraRotation = characterCamera.Transform.rotation,
-                _jumpDown = _input.Player.Jump.WasPressedThisFrame(),
-                _crouchDown = _input.Player.Sneak.WasPressedThisFrame(),
-                _crouchUp = _input.Player.Sneak.WasReleasedThisFrame()
+                _moveAxes = _input.Player.Movement.ReadValue<Vector2>(),
+                _jump = _input.Player.Jump.WasPressedThisFrame(),
+                _crouching = _input.Player.Sneak.IsPressed()
             };
 
             // Apply inputs to character
             character.SetInputs(ref characterInputs);
         }
-        
+
+        void RaycastInteractions() {
+            Ray ray = characterCamera.mainCamera.ScreenPointToRay(_screenCenter);
+
+            if (!Physics.Raycast(ray, out RaycastHit hit, maxInteractionDistance) ||
+                !hit.transform.TryGetComponent(out _currentInteractable)) {
+                if (hintTextBlock.text != "") 
+                    hintTextBlock.SetText("");
+                
+                return;
+            }
+
+            hintTextBlock.SetText(_currentInteractable.HintText);
+        }
+
+        void InteractionPerformed(InputAction.CallbackContext ctx) {
+            if (_currentInteractable != null) _currentInteractable.Interact(this);
+        }
+
+        void UseItemPerformed(InputAction.CallbackContext ctx) {
+            ItemObject item = inventory.SelectedSlot.GetItem();
+            if (item != null) item.Use(this);
+        }
+
         void OnEnable() => _input.Enable();
 
         void OnDisable() => _input.Disable();

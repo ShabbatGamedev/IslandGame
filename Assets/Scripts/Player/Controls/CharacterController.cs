@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using KinematicCharacterController.Core;
 using UnityEngine;
 
@@ -17,9 +16,8 @@ namespace Player.Controls {
     public struct PlayerCharacterInputs {
         public Quaternion _cameraRotation;
         public Vector2 _moveAxes;
-        public bool _jumpDown;
-        public bool _crouchDown;
-        public bool _crouchUp;
+        public bool _jump;
+        public bool _crouching;
     }
 
     public enum BonusOrientationMethod {
@@ -116,13 +114,13 @@ namespace Player.Controls {
                     };
 
                     // Jumping input
-                    if (inputs._jumpDown) {
+                    if (inputs._jump) {
                         _timeSinceJumpRequested = 0f;
                         _jumpRequested = true;
                     }
 
                     // Crouching input
-                    if (inputs._crouchDown) {
+                    if (inputs._crouching) {
                         _shouldBeCrouching = true;
 
                         if (!_isCrouching) {
@@ -130,8 +128,7 @@ namespace Player.Controls {
                             motor.SetCapsuleDimensions(0.5f, crouchedCapsuleHeight, crouchedCapsuleHeight * 0.5f);
                             meshRoot.localScale = new Vector3(1f, 0.5f, 1f);
                         }
-                    } else if (inputs._crouchUp) 
-                        _shouldBeCrouching = false;
+                    } else _shouldBeCrouching = false;
 
                     break;
                 }
@@ -336,7 +333,7 @@ namespace Player.Controls {
                     // Handle uncrouching
                     if (_isCrouching && !_shouldBeCrouching) {
                         // Do an overlap test with the character's standing height to see if there are any obstructions
-                        motor.SetCapsuleDimensions(0.5f, 2f, 0f);
+                        motor.SetCapsuleDimensions(0.5f, 2f, 1f);
 
                         if (motor.CharacterOverlap(
                                 motor.TransientPosition,

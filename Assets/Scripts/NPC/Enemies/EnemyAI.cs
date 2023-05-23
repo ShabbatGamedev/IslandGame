@@ -15,7 +15,7 @@ namespace NPC.Enemies {
         
         public virtual void Awake() {
             _player = GameObject.FindGameObjectWithTag("Player").transform;
-            _playerRadius = _player.GetComponent<CharacterController>().radius;
+            _playerRadius = _player.GetComponent<CapsuleCollider>().radius;
         }
 
         public virtual void Update() {

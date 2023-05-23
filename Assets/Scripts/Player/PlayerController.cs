@@ -25,7 +25,7 @@ namespace Player {
 
         void Awake() {
             _input = InputsSingleton.PlayerInput;
-            
+
             _input.Player.Interaction.performed += InteractionPerformed;
             _input.Player.UseItem.performed += UseItemPerformed;
         }
@@ -44,8 +44,8 @@ namespace Player {
             Transform playerTransform = transform;
             bool canJump = _input.Player.Jump.IsPressed() && controller.isGrounded;
 
-            Vector2 moveAxis = _input.Player.Movement.ReadValue<Vector2>();
-            Vector3 movement = (playerTransform.right * moveAxis.x + playerTransform.forward * moveAxis.y) * _speed;
+            Vector2 moveAxes = _input.Player.Movement.ReadValue<Vector2>();
+            Vector3 movement = (playerTransform.right * moveAxes.x + playerTransform.forward * moveAxes.y) * _speed;
 
             if (canJump) _velocity.y = Mathf.Sqrt(jumpHeight * -2 * -gravity);
             else if (controller.isGrounded) _velocity.y = -2;

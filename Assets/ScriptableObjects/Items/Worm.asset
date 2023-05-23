@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebbfe686dea943dcbd1cffdead5f179a, type: 3}
   m_Name: Worm
   m_EditorClassIdentifier: 
-  itemName: New item
-  hintText: 
-  icon: {fileID: 0}
-  prefab: {fileID: 0}
-  stackSize: 16
+  itemName: Worm
+  hintText: Dig worms
+  icon: {fileID: 21300000, guid: c1c2e195b0ddcbb418a9e08c2026179c, type: 3}
+  prefab: {fileID: 2630650317644447391, guid: 83b44f5094e696c46bd6f27fd366f9c6, type: 3}
+  stackSize: 7
   healAmount: 1

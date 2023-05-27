@@ -10,7 +10,7 @@ namespace Items.ItemLogic {
         public override void Interact(Interactor interactor) => Pickup(interactor);
 
         void Pickup(Interactor interactor) {
-            Debug.Log($"Picking up {Item.itemName}");
+            Debug.Log($"Picking up {Item.name}");
 
             if (PickupItem(interactor)) Destroy(gameObject);
             else Debug.LogWarning("Not enough space");

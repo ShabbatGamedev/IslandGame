@@ -54,7 +54,7 @@ namespace Player.Inventory {
         }
 
         public bool AddItem(ItemObject item) {
-            ItemStack stack = _stacks.FirstOrDefault(stack => stack.ItemName == item.itemName && stack.HasSpace);
+            ItemStack stack = _stacks.FirstOrDefault(stack => stack.CanTakeItem(item));
 
             if (stack != null) {
                 stack.AddItem(item);

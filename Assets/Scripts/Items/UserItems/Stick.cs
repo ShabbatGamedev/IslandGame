@@ -4,18 +4,22 @@ using UnityEngine;
 
 namespace Items.UserItems {
     [CreateAssetMenu(fileName = "Stick", menuName = "Inventory/Stick", order = 0)]
-    public class Stick : ItemObject {
+    public class Stick : ItemObject, IWeapon {
         [SerializeField] int damage = 1;
+        [SerializeField] float knockBackForce = 2.5f;
         
         public override void Use(Interactor interactor) {
-            Ray ray = interactor.Camera.ScreenPointToRay(Interactor._screenCenter);
+            Enemy enemy = interactor.LookingAtEnemy;
             
-            if (!Physics.Raycast(ray, out RaycastHit hit, interactor.maxAttackDistance) ||
-                !hit.transform.TryGetComponent(out Enemy enemy)) return;
+            if (enemy == null) return;
             
-            enemy.Damage(damage);
+            enemy.Damage(interactor, this);
 
-            Debug.Log($"УЕБАЛ ПИДОРА {enemy.mob.enemyName} НА {damage}ХП");
+            Debug.Log($"УЕБАЛ ПИДОРА {enemy.mob.name} НА {Damage}ХП");
         }
+
+        public int Damage => damage;
+
+        public float KnockBackForce => knockBackForce;
     }
 }

@@ -58,7 +58,7 @@ namespace Player.Controls {
             _currentDistance = defaultDistance;
             TargetDistance = _currentDistance;
 
-            _targetVerticalAngle = 0f;
+            _targetVerticalAngle = 0;
 
             PlanarDirection = Vector3.forward;
         }
@@ -78,8 +78,8 @@ namespace Player.Controls {
         public void UpdateWithInput(float deltaTime, Vector3 rotationInput) {
             if (!FollowTransform) return;
 
-            if (invertX) rotationInput.x *= -1f;
-            if (invertY) rotationInput.y *= -1f;
+            if (invertX) rotationInput.x *= -1;
+            if (invertY) rotationInput.y *= -1;
 
             // Process rotation input
             Vector3 up = FollowTransform.up;
@@ -91,7 +91,7 @@ namespace Player.Controls {
             _targetVerticalAngle -= rotationInput.y * rotationSpeed;
             _targetVerticalAngle = Mathf.Clamp(_targetVerticalAngle, minVerticalAngle, maxVerticalAngle);
             Quaternion verticalRot = Quaternion.Euler(_targetVerticalAngle, 0, 0);
-            Quaternion targetRotation = Quaternion.Slerp(Transform.rotation, planarRot * verticalRot, 1f - Mathf.Exp(-rotationSharpness * deltaTime));
+            Quaternion targetRotation = Quaternion.Slerp(Transform.rotation, planarRot * verticalRot, 1 - Mathf.Exp(-rotationSharpness * deltaTime));
 
             // Apply rotation
             Transform.rotation = targetRotation;
@@ -103,7 +103,7 @@ namespace Player.Controls {
             TargetDistance = Mathf.Clamp(TargetDistance, minDistance, maxDistance);
 
             // Find the smoothed follow position
-            _currentFollowPosition = Vector3.Lerp(_currentFollowPosition, FollowTransform.position, 1f - Mathf.Exp(-followingSharpness * deltaTime));
+            _currentFollowPosition = Vector3.Lerp(_currentFollowPosition, FollowTransform.position, 1 - Mathf.Exp(-followingSharpness * deltaTime));
 
             // Handle obstructions
             RaycastHit closestHit = new() { distance = Mathf.Infinity };

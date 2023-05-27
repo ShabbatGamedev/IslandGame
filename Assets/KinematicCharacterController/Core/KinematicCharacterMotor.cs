@@ -1003,9 +1003,7 @@ namespace KinematicCharacterController.Core {
                         remainingMovementDirection, // direction
                         remainingMovementMagnitude + CollisionOffset, // distance
                         out RaycastHit closestSweepHit, // closest hit
-                        _internalCharacterHits) // all hits
-                    >
-                    0) {
+                        _internalCharacterHits) > 0) { // all hits
                     closestSweepHitNormal = closestSweepHit.normal;
                     closestSweepHitDistance = closestSweepHit.distance;
                     closestSweepHitCollider = closestSweepHit.collider;

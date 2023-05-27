@@ -8,11 +8,11 @@ namespace Items {
     public abstract class ItemObject : ScriptableObject {
         public readonly Guid _guid = Guid.NewGuid();
         
-        public string itemName = "New item";
+        public new string name = "New item";
         public string hintText; // Tooltip next to the button when pointing at an object 
         public Sprite icon;
         public GameObject prefab; // Model of the item
-        [Range(1, 64)] public int stackSize = 16; // Maximum amount of item in one inventory slot
+        [Range(1, 64)] public int size = 16; // Maximum amount of item in one inventory slot
 
         public abstract void Use(Interactor interactor);
 

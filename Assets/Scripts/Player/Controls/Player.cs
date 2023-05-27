@@ -15,7 +15,6 @@ namespace Player.Controls {
         [Header("HUD")]
         [SerializeField] TextMeshProUGUI hintTextBlock;
         
-        Interactable _currentInteractable;
         PlayerInput _input;
 
         void Awake() {
@@ -53,7 +52,7 @@ namespace Player.Controls {
         void HandleCameraInput() {
             // Create the look input vector for the camera
             Vector2 mouseLookAxes = _input.Player.Camera.ReadValue<Vector2>();
-            Vector3 lookInputVector = new(mouseLookAxes.x, mouseLookAxes.y, 0f);
+            Vector3 lookInputVector = new(mouseLookAxes.x, mouseLookAxes.y, 0);
 
             // Prevent moving the camera while the cursor isn't locked
             if (Cursor.lockState != CursorLockMode.Locked) lookInputVector = Vector3.zero;
@@ -78,19 +77,26 @@ namespace Player.Controls {
         void RaycastInteractions() {
             Ray ray = characterCamera.mainCamera.ScreenPointToRay(_screenCenter);
 
-            if (!Physics.Raycast(ray, out RaycastHit hit, maxInteractionDistance) ||
-                !hit.transform.TryGetComponent(out _currentInteractable)) {
-                if (hintTextBlock.text != "") 
-                    hintTextBlock.SetText("");
-                
-                return;
-            }
+            bool isHit = Physics.Raycast(ray, out RaycastHit hit, maxInteractionDistance);
 
-            hintTextBlock.SetText(_currentInteractable.HintText);
+            switch (isHit) {
+                case true when LookingAt != hit.transform:
+                    LookingAt = hit.transform;
+
+                    hintTextBlock.SetText(LookingAtInteractable != null ? LookingAtInteractable.HintText : "");
+                    break;
+
+                case false:
+                    LookingAt = null;
+                    if (hintTextBlock.text != "") hintTextBlock.SetText("");
+                    break;
+            }
+            
+            RaycastHit = hit;
         }
 
         void InteractionPerformed(InputAction.CallbackContext ctx) {
-            if (_currentInteractable != null) _currentInteractable.Interact(this);
+            if (LookingAtInteractable != null) LookingAtInteractable.Interact(this);
         }
 
         void UseItemPerformed(InputAction.CallbackContext ctx) {

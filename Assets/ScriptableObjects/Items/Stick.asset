@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c653c6f3ac234500ba0d242f602531eb, type: 3}
   m_Name: Stick
   m_EditorClassIdentifier: 
-  itemName: Stick
+  name: Stick
   hintText: Pickup stick
   icon: {fileID: 21300048, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
   prefab: {fileID: 6683606618917165740, guid: c9d9d746d39cea9498ffbca61760681d, type: 3}
-  stackSize: 1
+  size: 1
   damage: 1
+  knockBackForce: 2.5

@@ -4,14 +4,11 @@ using KinematicCharacterController.Core;
 using UnityEngine;
 
 namespace Player.Controls {
-    public enum CharacterState {
-        Default
-    }
+    public enum CharacterState { Default }
 
-    public enum OrientationMethod {
-        TowardsCamera,
-        TowardsMovement
-    }
+    public enum OrientationMethod { TowardsCamera, TowardsMovement }
+
+    public enum BonusOrientationMethod { TowardsGravity, TowardsGroundSlopeAndGravity }
 
     public struct PlayerCharacterInputs {
         public Quaternion _cameraRotation;
@@ -20,42 +17,38 @@ namespace Player.Controls {
         public bool _crouching;
     }
 
-    public enum BonusOrientationMethod {
-        TowardsGravity,
-        TowardsGroundSlopeAndGravity
-    }
-    
+    [RequireComponent(typeof(KinematicCharacterMotor))]
     public class CharacterController : MonoBehaviour, ICharacterController {
         #region Fields
 
-        public KinematicCharacterMotor motor;
+        [ReadOnly] public KinematicCharacterMotor motor;
         
         [Header("Stable Movement")] 
-        public float maxStableMoveSpeed = 10f;
-        public float stableMovementSharpness = 15f;
-        public float orientationSharpness = 10f;
+        public float maxStableMoveSpeed = 10;
+        public float stableMovementSharpness = 15;
+        public float orientationSharpness = 10;
         public OrientationMethod orientationMethod = OrientationMethod.TowardsCamera;
 
         [Header("Air Movement")]
-        public float maxAirMoveSpeed = 15f;
-        public float airAccelerationSpeed = 15f;
+        public float maxAirMoveSpeed = 15;
+        public float airAccelerationSpeed = 15;
         public float drag = 0.1f;
 
         [Header("Jumping")] 
         public bool allowJumpingWhenSliding;
-        public float jumpUpSpeed = 10f;
-        public float jumpScalableForwardSpeed = 10f;
+        public float jumpUpSpeed = 10;
+        public float jumpScalableForwardSpeed = 10;
         public float jumpPreGroundingGraceTime;
         public float jumpPostGroundingGraceTime;
 
         [Header("Misc")] 
         public List<Collider> ignoredColliders = new();
         public BonusOrientationMethod bonusOrientationMethod = BonusOrientationMethod.TowardsGravity;
-        public float bonusOrientationSharpness = 10f;
-        public Vector3 gravity = new(0, -30f, 0);
+        public float bonusOrientationSharpness = 10;
+        public Vector3 gravity = new(0, -30, 0);
         public Transform meshRoot;
         public Transform cameraFollowPoint;
-        public float crouchedCapsuleHeight = 1f;
+        public float crouchedCapsuleHeight = 1;
 
         readonly Collider[] _probedColliders = new Collider[8];
         Vector3 _internalVelocityAdd = Vector3.zero;
@@ -65,21 +58,18 @@ namespace Player.Controls {
         bool _jumpRequested;
         Vector3 _lookInputVector;
         Vector3 _moveInputVector;
-        RaycastHit[] _probedHits = new RaycastHit[8];
         bool _shouldBeCrouching;
         float _timeSinceJumpRequested = Mathf.Infinity;
         float _timeSinceLastAbleToJump;
 
         Quaternion _tmpTransientRot;
-
-        Vector3 _lastInnerNormal = Vector3.zero;
-        Vector3 _lastOuterNormal = Vector3.zero;
-
         public CharacterState CurrentCharacterState { get; private set; }
         
         #endregion
 
         void Awake() {
+            motor = GetComponent<KinematicCharacterMotor>();
+            
             // Handle initial state
             TransitionToState(CharacterState.Default);
 
@@ -92,7 +82,7 @@ namespace Player.Controls {
         /// </summary>
         public void SetInputs(ref PlayerCharacterInputs inputs) {
             // Clamp input
-            Vector3 moveInputVector = Vector3.ClampMagnitude(new Vector3(inputs._moveAxes.x, 0, inputs._moveAxes.y), 1f);
+            Vector3 moveInputVector = Vector3.ClampMagnitude(new Vector3(inputs._moveAxes.x, 0, inputs._moveAxes.y), 1);
 
             // Calculate camera direction and rotation on the character plane
             Vector3 cameraPlanarDirection = Vector3.ProjectOnPlane(inputs._cameraRotation * Vector3.forward, motor.CharacterUp).normalized;
@@ -115,7 +105,7 @@ namespace Player.Controls {
 
                     // Jumping input
                     if (inputs._jump) {
-                        _timeSinceJumpRequested = 0f;
+                        _timeSinceJumpRequested = 0;
                         _jumpRequested = true;
                     }
 
@@ -126,7 +116,7 @@ namespace Player.Controls {
                         if (!_isCrouching) {
                             _isCrouching = true;
                             motor.SetCapsuleDimensions(0.5f, crouchedCapsuleHeight, crouchedCapsuleHeight * 0.5f);
-                            meshRoot.localScale = new Vector3(1f, 0.5f, 1f);
+                            meshRoot.localScale = new Vector3(1, 0.5f, 1);
                         }
                     } else _shouldBeCrouching = false;
 

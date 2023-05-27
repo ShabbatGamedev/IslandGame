@@ -10,26 +10,26 @@ namespace Items {
         /// </summary>
         /// <param name="item">Item in the stack.</param>
         public ItemStack(ItemObject item) {
-            StackItem = item;
+            Item = item;
 
             Items.Add(item);
         }
 
         public bool HasItems => Items.Any();
-        public bool HasSpace => ItemsCount < StackSize;
+        public bool HasSpace => ItemsCount < Size;
         public int ItemsCount => Items.Count;
 
-        public Sprite Icon => StackItem.icon;
-        public string ItemName => StackItem.itemName;
-        public int StackSize => StackItem.stackSize;
+        public Sprite Icon => Item.icon;
+        public string Name => Item.name;
+        public int Size => Item.size;
         
-        ItemObject StackItem { get; } 
+        ItemObject Item { get; } 
         List<ItemObject> Items { get; } = new();
 
         public event Action StackUpdated;
 
         public bool AddItem(ItemObject item) {
-            if (!HasSpace || StackItem != item) return false;
+            if (!HasSpace || Item != item) return false;
 
             Items.Add(item);
             StackUpdated?.Invoke();
@@ -37,12 +37,16 @@ namespace Items {
         }
 
         public void RemoveItem(ItemObject item) {
-            if (StackItem != item) return;
+            if (Item != item) return;
             
             if (Items.Remove(item)) 
                 StackUpdated?.Invoke();
         }
 
         public ItemObject LastItem() => Items.LastOrDefault();
+
+        public bool ContainsThisItem(ItemObject item) => Item == item;
+
+        public bool CanTakeItem(ItemObject item) => HasSpace && ContainsThisItem(item);
     }
 }

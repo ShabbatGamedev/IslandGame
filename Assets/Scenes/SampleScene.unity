@@ -5,11 +5,11 @@ OcclusionCullingSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_OcclusionBakeSettings:
-    smallestOccluder: 5
+    smallestOccluder: 1.25
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: 9fc0d4010bbf28b4594072e72b8655ab
+  m_OcclusionCullingData: {fileID: 36300000, guid: c94f5d6c0219f824288e05640a708e7d, type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -2386,10 +2386,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewRadius: 5
-  chaseRadius: 5
   stopRadius: 1.5
   lookingSpeed: 5
   mob: {fileID: 11400000, guid: 4e7ed29d3af148d4384d3ca260b2023c, type: 2}
+  awayFromPlayerDistance: 5
 --- !u!4 &678357623
 Transform:
   m_ObjectHideFlags: 0

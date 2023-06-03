@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Zombie
   parameters:
-    health: 5
+    health: 50
     damage: 1

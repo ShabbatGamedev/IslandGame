@@ -14,8 +14,6 @@ namespace Items.UserItems {
             if (enemy == null) return;
             
             enemy.Damage(interactor, this);
-
-            Debug.Log($"УЕБАЛ ПИДОРА {enemy.mob.name} НА {Damage}ХП");
         }
 
         public int Damage => damage;

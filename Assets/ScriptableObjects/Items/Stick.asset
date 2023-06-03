@@ -18,4 +18,4 @@ MonoBehaviour:
   prefab: {fileID: 6683606618917165740, guid: c9d9d746d39cea9498ffbca61760681d, type: 3}
   size: 1
   damage: 1
-  knockBackForce: 2.5
+  knockBackForce: 15

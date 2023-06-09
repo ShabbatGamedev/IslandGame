@@ -36,11 +36,13 @@ namespace Items {
             return true;
         }
 
-        public void RemoveItem(ItemObject item) {
-            if (Item != item) return;
+        public bool RemoveItem(ItemObject item) {
+            if (Item != item) return false;
+
+            bool removed = Items.Remove(item);
+            if (removed) StackUpdated?.Invoke();
             
-            if (Items.Remove(item)) 
-                StackUpdated?.Invoke();
+            return removed;
         }
 
         public ItemObject LastItem() => Items.LastOrDefault();

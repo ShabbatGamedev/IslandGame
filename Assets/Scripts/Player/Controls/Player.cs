@@ -75,24 +75,14 @@ namespace Player.Controls {
         }
 
         void RaycastInteractions() {
-            Ray ray = characterCamera.mainCamera.ScreenPointToRay(_screenCenter);
+            Ray ray = Camera.ScreenPointToRay(ScreenCenter);
 
-            bool isHit = Physics.Raycast(ray, out RaycastHit hit, maxInteractionDistance);
+            bool isHit = Physics.Raycast(ray, out RaycastHit hit);
 
-            switch (isHit) {
-                case true when LookingAt != hit.transform:
-                    LookingAt = hit.transform;
-
-                    hintTextBlock.SetText(LookingAtInteractable != null ? LookingAtInteractable.HintText : "");
-                    break;
-
-                case false:
-                    LookingAt = null;
-                    if (hintTextBlock.text != "") hintTextBlock.SetText("");
-                    break;
-            }
+            SetLookingAt(isHit ? hit : null);
             
-            RaycastHit = hit;
+            if (isHit) hintTextBlock.SetText(LookingAtInteractable != null ? LookingAtInteractable.HintText : "");
+            else if (hintTextBlock.text != "") hintTextBlock.SetText("");
         }
 
         void InteractionPerformed(InputAction.CallbackContext ctx) {
@@ -100,7 +90,7 @@ namespace Player.Controls {
         }
 
         void UseItemPerformed(InputAction.CallbackContext ctx) {
-            ItemObject item = inventory.SelectedSlot.GetItem();
+            ItemObject item = Inventory.SelectedSlot.GetItem();
             if (item != null) item.Use(this);
         }
 

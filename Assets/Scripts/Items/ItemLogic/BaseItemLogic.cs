@@ -8,6 +8,6 @@ namespace Items.ItemLogic {
         public abstract ItemObject Item { get; }
         public override string HintText => $"[{InteractionKey}] {Item.hintText}".Trim();
 
-        public virtual bool PickupItem(Interactor interactor) => interactor.inventory.AddItem(Item);
+        public virtual bool PickupItem(Interactor interactor) => interactor.Inventory.AddItem(Item);
     }
 }

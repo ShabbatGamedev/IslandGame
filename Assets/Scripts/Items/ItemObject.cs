@@ -17,7 +17,7 @@ namespace Items {
         public abstract void Use(Interactor interactor);
 
         public void RemoveFromInventory(Interactor interactor) {
-            InventorySystem inventory = interactor.inventory;
+            InventorySystem inventory = interactor.Inventory;
             
             inventory.RemoveItem(inventory.SelectedSlot.GetStack(), this);
         } 

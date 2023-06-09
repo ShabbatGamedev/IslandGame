@@ -3,7 +3,7 @@ using NPC.Enemies;
 using UnityEngine;
 
 namespace Items.UserItems {
-    [CreateAssetMenu(fileName = "Stick", menuName = "Inventory/Stick", order = 0)]
+    [CreateAssetMenu(fileName = "Stick", menuName = "Inventory/Stick")]
     public class Stick : ItemObject, IWeapon {
         [SerializeField] int damage = 1;
         [SerializeField] float knockBackForce = 2.5f;

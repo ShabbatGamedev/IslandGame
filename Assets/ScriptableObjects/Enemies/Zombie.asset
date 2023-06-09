@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e32b43532a440d4ac758b0e495b8390, type: 3}
   m_Name: Zombie
   m_EditorClassIdentifier: 
-  name: Zombie
+  <Name>k__BackingField: Zombie
   parameters:
-    health: 50
+    health: 10
     damage: 1

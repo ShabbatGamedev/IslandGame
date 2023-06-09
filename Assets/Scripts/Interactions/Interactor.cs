@@ -5,36 +5,32 @@ using UnityEngine;
 
 namespace Interactions {
     public abstract class Interactor : MonoBehaviour {
-        public static Vector2 _screenCenter => new Vector2(Screen.width, Screen.height) / 2;
+        public static Vector2 ScreenCenter => new Vector2(Screen.width, Screen.height) / 2;
         
-        public InventorySystem inventory;
-        public HealthSystem health;
+        [field: SerializeField] public InventorySystem Inventory { get; private set; }
+        [field: SerializeField] public HealthSystem Health { get; private set; }
 
-        public float maxInteractionDistance = 5;
-        public float maxAttackDistance = 5;
-
-        public RaycastHit RaycastHit { get; protected set; }
+        [SerializeField] float maxInteractionDistance = 5;
+        [SerializeField] float maxAttackDistance = 5;
         
+        public Transform LookingAt { get; private set; }
         public Interactable LookingAtInteractable { get; private set; }
         public Enemy LookingAtEnemy { get; private set; }
 
-        public Transform LookingAt {
-            get => _lookingAt;
-            protected set {
-                _lookingAt = value;
-
-                if (_lookingAt != null) {
-                    LookingAtInteractable = _lookingAt.GetComponent<Interactable>();
-                    LookingAtEnemy = _lookingAt.GetComponent<Enemy>();
-                } else {
-                    LookingAtInteractable = null;
-                    LookingAtEnemy = null;
-                }
+        public void SetLookingAt(RaycastHit? hit) {
+            if (hit != null) {
+                RaycastHit value = hit.Value;
+                
+                LookingAt = value.transform;
+                LookingAtInteractable = value.distance <= maxInteractionDistance ? LookingAt.GetComponent<Interactable>() : null;
+                LookingAtEnemy = value.distance <= maxAttackDistance ? LookingAt.GetComponent<Enemy>() : null;
+            } else {
+                LookingAt = null;
+                LookingAtInteractable = null;
+                LookingAtEnemy = null;
             }
         }
-
-        public Camera Camera { get; protected set; }
         
-        Transform _lookingAt;
+        public Camera Camera { get; protected set; }
     }
 }

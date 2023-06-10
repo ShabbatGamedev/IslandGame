@@ -47,7 +47,10 @@ namespace Player.Inventory {
         }
 
         void StackUpdated() {
-            if (!_stack.HasItems) _stack = null;
+            if (!_stack.HasItems) {
+                ClearStack();
+                return;
+            }
             
             UpdateUI();
         }

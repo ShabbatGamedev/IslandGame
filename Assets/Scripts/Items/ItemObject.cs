@@ -31,10 +31,13 @@ namespace Items {
         }
 
         public static bool operator ==([CanBeNull] ItemObject item, [CanBeNull] ItemObject otherItem) {
-            if (item is not null && otherItem is not null) return item._guid == otherItem._guid;
-            return item is null && otherItem is null;
+            bool itemNotNull = item is not null;
+            bool otherNotNull = otherItem is not null;
+            
+            if (itemNotNull && otherNotNull) return item._guid == otherItem._guid;
+            return !itemNotNull && !otherNotNull;
         }
         
-        public static bool operator !=(ItemObject item, ItemObject otherItem) => !(item == otherItem);
+        public static bool operator !=([CanBeNull] ItemObject item, [CanBeNull] ItemObject otherItem) => !(item == otherItem);
     }
 }

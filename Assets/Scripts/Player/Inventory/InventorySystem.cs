@@ -11,6 +11,7 @@ namespace Player.Inventory {
         /// Prefab with <see cref="InventorySlot"/> component.
         /// </summary>
         [SerializeField] GameObject prefab;
+        [SerializeField] Transform inventoryBar;
         [SerializeField] int maxSlots = 4;
         
         public bool HaveSpace => _stacks.Count < _slots.Count;
@@ -28,7 +29,7 @@ namespace Player.Inventory {
             _input = InputsSingleton.PlayerInput.InventorySelect;
 
             for (int i = 0; i < maxSlots; i++) {
-                GameObject slot = Instantiate(prefab, transform); // Create a slot on screen
+                GameObject slot = Instantiate(prefab, inventoryBar); // Create a slot on screen
                 InventorySlot slotComponent = slot.GetComponent<InventorySlot>(); // Getting inventory slot component from created slot
 
                 if (i == 0) slotComponent.SetSelection(true); // Select the first slot

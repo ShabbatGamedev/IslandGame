@@ -1784,7 +1784,6 @@ GameObject:
   - component: {fileID: 436949326}
   - component: {fileID: 436949329}
   - component: {fileID: 436949328}
-  - component: {fileID: 436949327}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -1812,20 +1811,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
---- !u!114 &436949327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 436949325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cff3eb41e19b490a91798f7373343bcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 6623835015091257747, guid: f9cfab023e6e0714299026e42b8c0cb4, type: 3}
-  maxHP: 7
 --- !u!114 &436949328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4628,7 +4613,6 @@ GameObject:
   - component: {fileID: 1320845096}
   - component: {fileID: 1320845095}
   - component: {fileID: 1320845100}
-  - component: {fileID: 1320845098}
   - component: {fileID: 1320845099}
   m_Layer: 5
   m_Name: InventoryBar
@@ -4695,20 +4679,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1320845093}
   m_CullTransparentMesh: 1
---- !u!114 &1320845098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1320845093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46af8f64fd45475e99be509978b19bc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 2364204998384891283, guid: 9508c844c6f421d4e9cf40ccf43cad84, type: 3}
-  maxSlots: 4
 --- !u!114 &1320845099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7862,6 +7832,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1956979341}
   - component: {fileID: 1956979340}
+  - component: {fileID: 1956979343}
+  - component: {fileID: 1956979342}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -7881,8 +7853,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d8010958e44c4f97822a374e04688d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Inventory>k__BackingField: {fileID: 1320845098}
-  <Health>k__BackingField: {fileID: 436949327}
+  <Inventory>k__BackingField: {fileID: 1956979343}
+  <Health>k__BackingField: {fileID: 1956979342}
   maxInteractionDistance: 5
   maxAttackDistance: 5
   character: {fileID: 29627689}
@@ -7903,6 +7875,36 @@ Transform:
   m_Father: {fileID: 1654045660}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1956979342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956979339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cff3eb41e19b490a91798f7373343bcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 6623835015091257747, guid: f9cfab023e6e0714299026e42b8c0cb4, type: 3}
+  healthBar: {fileID: 436949326}
+  maxHP: 7
+--- !u!114 &1956979343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956979339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46af8f64fd45475e99be509978b19bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 2364204998384891283, guid: 9508c844c6f421d4e9cf40ccf43cad84, type: 3}
+  inventoryBar: {fileID: 1320845094}
+  maxSlots: 4
 --- !u!1 &1966167644 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8044168794641542322, guid: 2c1bf0064036bbe48954c2fb550f8d58, type: 3}

@@ -7881,8 +7881,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d8010958e44c4f97822a374e04688d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 1320845098}
-  health: {fileID: 436949327}
+  <Inventory>k__BackingField: {fileID: 1320845098}
+  <Health>k__BackingField: {fileID: 436949327}
   maxInteractionDistance: 5
   maxAttackDistance: 5
   character: {fileID: 29627689}

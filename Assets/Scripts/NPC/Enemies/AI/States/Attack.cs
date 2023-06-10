@@ -11,6 +11,8 @@ namespace NPC.Enemies.AI.States {
         [SerializeField] float timeBetweenAttacks = 0.5f;
         [SerializeField] int damageHP = 1;
 
+        bool _look;
+        
         EnemyAI AI { get; set; }
 
         IEnumerator _attackRoutine;
@@ -25,6 +27,8 @@ namespace NPC.Enemies.AI.States {
         }
 
         public override void Update() {
+            if (_look) AI.LookAtPlayer();
+
             if (AI.CanAttack) return;
             
             AI.StopCoroutine(_attackRoutine);
@@ -33,13 +37,12 @@ namespace NPC.Enemies.AI.States {
 
         IEnumerator Attacking() {
             while (AI.CanAttack) {
-                AI.LookAtPlayer();
-                
+                _look = false;
                 yield return new WaitForSeconds(swingTime);
             
                 AI.PlayerInteractor.Health.Damage(damageHP);
-                AI.LookAtPlayer();
 
+                _look = true;
                 yield return new WaitForSeconds(timeBetweenAttacks);
             }
         }
